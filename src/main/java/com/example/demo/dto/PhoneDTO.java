@@ -12,6 +12,7 @@ public class PhoneDTO {
         lastId++;
         this.id = lastId;
     }
+
     public PhoneDTO() {
         lastId++;
         this.id = lastId;
@@ -21,12 +22,15 @@ public class PhoneDTO {
     public String getPhone() {
         return phone;
     }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }

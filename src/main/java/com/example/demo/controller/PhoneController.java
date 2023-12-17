@@ -2,13 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.PhoneDTO;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/phone")
 public class PhoneController {
 
     private ArrayList<PhoneDTO> phones = new ArrayList<>() {
@@ -17,7 +17,7 @@ public class PhoneController {
         }
     };
 
-    @GetMapping("/phone")
+    @GetMapping
     public List<PhoneDTO> getPhones(@RequestParam(required = false) String startWithParam) {
         if (startWithParam != null && !startWithParam.isEmpty()) {
             ArrayList<PhoneDTO> result = new ArrayList<>();
@@ -31,22 +31,17 @@ public class PhoneController {
         return phones;
     }
 
-    @GetMapping("/helloPage")
-    public String helloWorld() {
-        return "Hello World";
-    }
-
-    @PostMapping("/phone")
+    @PostMapping
     public PhoneDTO createPhone(@RequestBody PhoneDTO phone) {
         phones.add(phone);
         return phone;
     }
 
-@DeleteMapping("/phone/{id}")
-@ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete (@PathVariable int id){
+    @DeleteMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable int id) {
         for (int i = 0; i < phones.size(); i++) {
-            if (phones.get(i).getId() == id){
+            if (phones.get(i).getId() == id) {
                 phones.remove(phones.get(i));
                 break;
             }
